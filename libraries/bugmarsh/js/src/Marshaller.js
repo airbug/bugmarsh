@@ -27,8 +27,6 @@
 //@Require('Pair')
 //@Require('Set')
 //@Require('TypeUtil')
-//@Require('bugioc.ArgTag')
-//@Require('bugioc.ModuleTag')
 //@Require('bugmeta.BugMeta')
 
 
@@ -750,18 +748,6 @@ require('bugpack').context("*", function(bugpack) {
         STRING: "string",
         UNDEFINED: "undefined"
     };
-
-
-    //-------------------------------------------------------------------------------
-    // BugMeta
-    //-------------------------------------------------------------------------------
-
-    bugmeta.tag(Marshaller).with(
-        module("marshaller")
-            .args([
-                arg().ref("marshRegistry")
-            ])
-    );
 
 
     //-------------------------------------------------------------------------------

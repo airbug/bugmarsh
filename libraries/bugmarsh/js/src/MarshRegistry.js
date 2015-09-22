@@ -19,8 +19,6 @@
 //@Require('Class')
 //@Require('Map')
 //@Require('Obj')
-//@Require('bugioc.IConfiguringModule')
-//@Require('bugioc.ModuleTag')
 //@Require('bugmarsh.MarshTagProcessor')
 //@Require('bugmarsh.MarshTagScan')
 //@Require('bugmeta.BugMeta')
@@ -40,8 +38,6 @@ require('bugpack').context("*", function(bugpack) {
     var Class               = bugpack.require('Class');
     var Map                 = bugpack.require('Map');
     var Obj                 = bugpack.require('Obj');
-    var IConfiguringModule  = bugpack.require('bugioc.IConfiguringModule');
-    var ModuleTag           = bugpack.require('bugioc.ModuleTag');
     var MarshTagProcessor   = bugpack.require('bugmarsh.MarshTagProcessor');
     var MarshTagScan        = bugpack.require('bugmarsh.MarshTagScan');
     var BugMeta             = bugpack.require('bugmeta.BugMeta');
@@ -106,13 +102,13 @@ require('bugpack').context("*", function(bugpack) {
 
 
         //-------------------------------------------------------------------------------
-        // IConfiguringModule Implementation
+        // Public Methods
         //-------------------------------------------------------------------------------
 
         /**
          *
          */
-        configureModule: function() {
+        configure: function() {
             if (!this.configured) {
                 this.configured = true;
                 var scan = new MarshTagScan(bugmeta, new MarshTagProcessor(this));
@@ -121,11 +117,6 @@ require('bugpack').context("*", function(bugpack) {
                 throw new Bug("IllegalState", {}, "Already configured module MarshRegistry");
             }
         },
-
-
-        //-------------------------------------------------------------------------------
-        // Public Methods
-        //-------------------------------------------------------------------------------
 
         /**
          * @param {Class} _class
@@ -192,22 +183,6 @@ require('bugpack').context("*", function(bugpack) {
             }
         }
     });
-
-
-    //-------------------------------------------------------------------------------
-    // Implement Interfaces
-    //-------------------------------------------------------------------------------
-
-    Class.implement(MarshRegistry, IConfiguringModule);
-
-
-    //-------------------------------------------------------------------------------
-    // BugMeta
-    //-------------------------------------------------------------------------------
-
-    bugmeta.tag(MarshRegistry).with(
-        module("marshRegistry")
-    );
 
 
     //-------------------------------------------------------------------------------
